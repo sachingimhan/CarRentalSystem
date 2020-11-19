@@ -4,21 +4,13 @@ import lk.easycar.rental.dto.CustomerDTO;
 import lk.easycar.rental.service.CustomerService;
 import lk.easycar.rental.util.StrandedResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
-=======
-import org.springframework.data.repository.query.Param;
->>>>>>> 73bbd27... SiginUp
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-<<<<<<< HEAD
-=======
-import java.security.Principal;
 import java.util.List;
 
->>>>>>> 73bbd27... SiginUp
 @RestController
 @RequestMapping("/api/v1/customer")
 @CrossOrigin
@@ -29,21 +21,13 @@ public class CustomerController {
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity saveCustomer(@RequestBody CustomerDTO dto) {
-<<<<<<< HEAD
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setLocation(URI.create("http://www.google.lk"));
-//        return new ResponseEntity(headers, HttpStatus.FOUND);
-=======
->>>>>>> 73bbd27... SiginUp
         boolean b = service.saveCustomer(dto);
         if (b) {
             return new ResponseEntity(new StrandedResponse(b, "Customer Saved.!"), HttpStatus.OK);
         } else {
             return new ResponseEntity(new StrandedResponse(b, "Customer Not Saved.!"), HttpStatus.OK);
         }
-<<<<<<< HEAD
-//        return ResponseEntity.status(HttpStatus.FOUND).header(HttpHeaders.LOCATION, "http://google.lk").build();
-=======
+
     }
 
     @PutMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
@@ -57,7 +41,7 @@ public class CustomerController {
     }
 
     @DeleteMapping(params = {"id"})
-    public ResponseEntity deleteCustomer(@Param("id") String id) {
+    public ResponseEntity deleteCustomer(@RequestParam("id") String id) {
         boolean b = service.deleteCustomer(id);
         if (b) {
             return new ResponseEntity(new StrandedResponse(b, "Customer Deleted.!"), HttpStatus.OK);
@@ -84,7 +68,6 @@ public class CustomerController {
         } else {
             return new ResponseEntity(new StrandedResponse(false, "Customers Not Found.!"), HttpStatus.OK);
         }
->>>>>>> 73bbd27... SiginUp
     }
 
 }

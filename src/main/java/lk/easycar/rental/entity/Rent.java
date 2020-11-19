@@ -1,13 +1,12 @@
 package lk.easycar.rental.entity;
 
-<<<<<<< HEAD
+
 import lombok.*;
-=======
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
->>>>>>> 73bbd27... SiginUp
+
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -16,10 +15,7 @@ import java.sql.Time;
 
 @Entity
 @NoArgsConstructor
-<<<<<<< HEAD
 @AllArgsConstructor
-=======
->>>>>>> 73bbd27... SiginUp
 @Getter
 @Setter
 @ToString
@@ -28,7 +24,8 @@ public class Rent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int reqId;
     private Date date;
-    private Time time;
+    private Date fromDate;
+    private Date toDate;
     private String pickUpNote;
     private String returnNote;
     private BigDecimal waiverAmount;
@@ -39,26 +36,22 @@ public class Rent {
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "RegNo", referencedColumnName = "regNo", nullable = false)
     private Car car;
-<<<<<<< HEAD
-
-=======
     @OneToOne(mappedBy = "rent")
     private CarReturn returnCar;
     @ManyToOne
-    @JoinColumn(name = "DrId", referencedColumnName = "nic", nullable = false)
+    @JoinColumn(name = "DrId", referencedColumnName = "nic", nullable = true)
     private Driver driver;
 
-    public Rent(int reqId, Date date, Time time, String pickUpNote, String returnNote, BigDecimal waiverAmount, String state, Customer customer, Car car, Driver driver) {
+    public Rent(int reqId, Date date, Date fromDate, Date toDate, String pickUpNote, String returnNote, BigDecimal waiverAmount, String state, Customer customer, Car car) {
         this.reqId = reqId;
         this.date = date;
-        this.time = time;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
         this.pickUpNote = pickUpNote;
         this.returnNote = returnNote;
         this.waiverAmount = waiverAmount;
         this.state = state;
         this.customer = customer;
         this.car = car;
-        this.driver = driver;
     }
->>>>>>> 73bbd27... SiginUp
 }

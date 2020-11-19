@@ -2,10 +2,8 @@ package lk.easycar.rental.entity;
 
 import lombok.*;
 
-<<<<<<< HEAD
-=======
+
 import javax.persistence.CascadeType;
->>>>>>> 73bbd27... SiginUp
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -33,11 +31,8 @@ public class Car {
     private double dailyFreeKm;
     private double monthlyFreeKm;
     private BigDecimal drivenKm;
-<<<<<<< HEAD
-    @OneToMany(mappedBy = "car")
-=======
+
     @OneToMany(mappedBy = "car",cascade = CascadeType.ALL)
->>>>>>> 73bbd27... SiginUp
     private List<Rent> rentList = new ArrayList<>();
 
     public Car(String regNo, String brand, String type, int passengerCount, String color, String transmissionType, String fuelType, BigDecimal dailyRate, BigDecimal monthlyRate, BigDecimal extraKmPrice, double dailyFreeKm, double monthlyFreeKm, BigDecimal drivenKm) {

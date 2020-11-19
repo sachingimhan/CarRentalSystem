@@ -34,13 +34,10 @@ public class JpaConfig {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/easycar?createDatabaseIfNotExist=true");
-<<<<<<< HEAD
         dataSource.setUsername("sachin");
         dataSource.setPassword("rockey@123");
-=======
         dataSource.setUsername("root");
         dataSource.setPassword("");
->>>>>>> 73bbd27... SiginUp
         return dataSource;
     }
 

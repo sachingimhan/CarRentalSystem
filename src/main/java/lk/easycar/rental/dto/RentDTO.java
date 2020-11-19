@@ -19,7 +19,8 @@ public class RentDTO {
 
     private int reqId;
     private Date date;
-    private Time time;
+    private Date fromDate;
+    private Date toDate;
     private String pickUpNote;
     private String returnNote;
     private BigDecimal waiverAmount;
@@ -29,16 +30,16 @@ public class RentDTO {
     private CarReturnDTO returnCar;
     private Driver driver;
 
-    public RentDTO(int reqId, Date date, Time time, String pickUpNote, String returnNote, BigDecimal waiverAmount, String state, CustomerDTO customer, CarDTO car, Driver driver) {
+    public RentDTO(int reqId, Date date, Date fromDate, Date toDate, String pickUpNote, String returnNote, BigDecimal waiverAmount, String state, CustomerDTO customer, CarDTO car) {
         this.reqId = reqId;
         this.date = date;
-        this.time = time;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
         this.pickUpNote = pickUpNote;
         this.returnNote = returnNote;
         this.waiverAmount = waiverAmount;
         this.state = state;
         this.customer = customer;
         this.car = car;
-        this.driver = driver;
     }
 }

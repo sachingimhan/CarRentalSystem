@@ -2,20 +2,12 @@ package lk.easycar.rental.service.impl;
 
 import lk.easycar.rental.dto.CustomerDTO;
 import lk.easycar.rental.entity.Customer;
-<<<<<<< HEAD
-import lk.easycar.rental.repo.CustomerRepo;
-import lk.easycar.rental.service.CustomerService;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Autowired;
-=======
-import lk.easycar.rental.entity.UserLogin;
 import lk.easycar.rental.repo.CustomerRepo;
 import lk.easycar.rental.repo.UserLoginRepo;
 import lk.easycar.rental.service.CustomerService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
->>>>>>> 73bbd27... SiginUp
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,24 +18,16 @@ import java.util.Optional;
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
 
-<<<<<<< HEAD
-    @Autowired
-    CustomerRepo repo;
-    @Autowired
-    ModelMapper mapper;
-=======
+    private CustomerRepo repo;
+    private ModelMapper mapper;
     private UserLoginRepo loginRepo;
 
-    private CustomerRepo repo;
-
-    private ModelMapper mapper;
-
+    @Autowired
     public CustomerServiceImpl(CustomerRepo repo, ModelMapper mapper, UserLoginRepo loginRepo) {
         this.repo = repo;
         this.mapper = mapper;
         this.loginRepo = loginRepo;
     }
->>>>>>> 73bbd27... SiginUp
 
     @Override
     public boolean saveCustomer(CustomerDTO dto) {

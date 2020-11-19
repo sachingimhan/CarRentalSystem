@@ -1,20 +1,14 @@
 package lk.easycar.rental.entity;
 
-<<<<<<< HEAD
-import lombok.*;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
-=======
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
->>>>>>> 73bbd27... SiginUp
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
@@ -29,13 +23,10 @@ public class Customer {
     private String address;
     private String contact;
     private String drivingLicNo;
-<<<<<<< HEAD
-    @OneToMany(mappedBy = "customer")
-    private List<Rent> rentList = new ArrayList<>();
-=======
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Rent> rentList;
->>>>>>> 73bbd27... SiginUp
+
 
     public Customer(String nic, String name, String address, String contact, String drivingLicNo) {
         this.nic = nic;
@@ -44,8 +35,4 @@ public class Customer {
         this.contact = contact;
         this.drivingLicNo = drivingLicNo;
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 73bbd27... SiginUp
 }

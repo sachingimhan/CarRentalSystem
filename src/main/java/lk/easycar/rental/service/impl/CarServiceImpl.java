@@ -12,14 +12,20 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+
 @Service
 @Transactional
 public class CarServiceImpl implements CarService {
 
+    private CarRepo repo;
+
+    private ModelMapper mapper;
+
     @Autowired
-    CarRepo repo;
-    @Autowired
-    ModelMapper mapper;
+    public CarServiceImpl(CarRepo repo, ModelMapper mapper) {
+        this.repo = repo;
+        this.mapper = mapper;
+    }
 
     @Override
     public boolean saveCar(CarDTO dto) {
