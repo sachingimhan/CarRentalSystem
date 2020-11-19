@@ -15,7 +15,7 @@ public class CarReturn {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int rid;
-    private Date date;
+    private Date returnDate;
     private BigDecimal drivenKm;
     @OneToOne
     @JoinColumn(name = "requestId", referencedColumnName = "reqId", nullable = false)
@@ -23,9 +23,9 @@ public class CarReturn {
     @OneToOne(mappedBy = "returnCar")
     private Payment payment;
 
-    public CarReturn(int rid, Date date, BigDecimal drivenKm, Rent rent) {
+    public CarReturn(int rid, Date returnDate, BigDecimal drivenKm, Rent rent) {
         this.rid = rid;
-        this.date = date;
+        this.returnDate = returnDate;
         this.drivenKm = drivenKm;
         this.rent = rent;
     }

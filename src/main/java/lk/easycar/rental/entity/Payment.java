@@ -19,7 +19,7 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int payId;
-    private Date date;
+    private Date payDate;
     private BigDecimal totalAmount;
     @OneToOne
     @JoinColumn(name = "rentId",referencedColumnName = "rid",nullable = false)
@@ -27,9 +27,9 @@ public class Payment {
     @OneToMany(mappedBy = "payment")
     private List<PaymentDetail> details;
 
-    public Payment(int payId, Date date, BigDecimal totalAmount, CarReturn returnCar, List<PaymentDetail> details) {
+    public Payment(int payId, Date payDate, BigDecimal totalAmount, CarReturn returnCar, List<PaymentDetail> details) {
         this.payId = payId;
-        this.date = date;
+        this.payDate = payDate;
         this.totalAmount = totalAmount;
         this.returnCar = returnCar;
         this.details = details;

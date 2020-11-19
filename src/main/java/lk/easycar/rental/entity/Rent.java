@@ -23,7 +23,7 @@ public class Rent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int reqId;
-    private Date date;
+    private Date palaceDate;
     private Date fromDate;
     private Date toDate;
     private String pickUpNote;
@@ -42,9 +42,9 @@ public class Rent {
     @JoinColumn(name = "DrId", referencedColumnName = "nic", nullable = true)
     private Driver driver;
 
-    public Rent(int reqId, Date date, Date fromDate, Date toDate, String pickUpNote, String returnNote, BigDecimal waiverAmount, String state, Customer customer, Car car) {
+    public Rent(int reqId, Date palaceDate, Date fromDate, Date toDate, String pickUpNote, String returnNote, BigDecimal waiverAmount, String state, Customer customer, Car car) {
         this.reqId = reqId;
-        this.date = date;
+        this.palaceDate = palaceDate;
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.pickUpNote = pickUpNote;

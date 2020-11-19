@@ -1,5 +1,6 @@
 package lk.easycar.rental.controller;
 
+import jdk.nashorn.internal.objects.annotations.Getter;
 import lk.easycar.rental.dto.CustomerDTO;
 import lk.easycar.rental.service.CustomerService;
 import lk.easycar.rental.util.StrandedResponse;
@@ -60,7 +61,7 @@ public class CustomerController {
         }
     }
 
-    @PostMapping
+    @GetMapping
     public ResponseEntity getAllCustomers() {
         List<CustomerDTO> allCustomers = service.getAllCustomers();
         if (allCustomers != null) {
