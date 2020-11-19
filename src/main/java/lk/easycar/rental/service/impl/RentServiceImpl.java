@@ -1,7 +1,13 @@
 package lk.easycar.rental.service.impl;
 
+import lk.easycar.rental.dto.CarDTO;
+import lk.easycar.rental.dto.CustomerDTO;
+import lk.easycar.rental.dto.DriverDTO;
 import lk.easycar.rental.dto.RentDTO;
 import lk.easycar.rental.entity.Rent;
+import lk.easycar.rental.repo.CarRepo;
+import lk.easycar.rental.repo.CustomerRepo;
+import lk.easycar.rental.repo.DriverRepo;
 import lk.easycar.rental.repo.RentRepo;
 import lk.easycar.rental.service.RentService;
 import org.modelmapper.ModelMapper;
@@ -11,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+
 @Service
 @Transactional
 public class RentServiceImpl implements RentService {
@@ -18,11 +25,18 @@ public class RentServiceImpl implements RentService {
     RentRepo repo;
     @Autowired
     ModelMapper mapper;
+    @Autowired
+    CustomerRepo customerRepo;
+    @Autowired
+    CarRepo carRepo;
+    @Autowired
+    DriverRepo driverRepo;
 
     @Override
     public boolean saveRent(RentDTO dto) {
         if (!repo.existsById(dto.getReqId())) {
-            repo.save(mapper.map(dto, Rent.class));
+            Rent map = mapper.map(dto, Rent.class);
+            repo.save(map);
             return true;
         }
         return false;

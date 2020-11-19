@@ -32,7 +32,7 @@ public class Car {
     private double drivenKm;
 
     @OneToMany(mappedBy = "car",cascade = CascadeType.ALL)
-    private List<Rent> rentList = new ArrayList<>();
+    private List<Rent> rentList;
 
     public Car(String regNo, String brand, String type, int passengerCount, String color, String transmissionType, String fuelType, double dailyRate, double monthlyRate, double extraKmPrice, double dailyFreeKm, double monthlyFreeKm, double drivenKm) {
         this.regNo = regNo;

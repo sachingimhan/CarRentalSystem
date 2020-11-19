@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.Column;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
@@ -18,7 +19,7 @@ import java.sql.Time;
 public class RentDTO {
 
     private int reqId;
-    private Date date;
+    private Date palaceDate;
     private Date fromDate;
     private Date toDate;
     private String pickUpNote;
@@ -28,11 +29,11 @@ public class RentDTO {
     private CustomerDTO customer;
     private CarDTO car;
     private CarReturnDTO returnCar;
-    private Driver driver;
+    private DriverDTO driver;
 
-    public RentDTO(int reqId, Date date, Date fromDate, Date toDate, String pickUpNote, String returnNote, BigDecimal waiverAmount, String state, CustomerDTO customer, CarDTO car) {
+    public RentDTO(int reqId, Date palaceDate, Date fromDate, Date toDate, String pickUpNote, String returnNote, BigDecimal waiverAmount, String state, CustomerDTO customer, CarDTO car) {
         this.reqId = reqId;
-        this.date = date;
+        this.palaceDate = palaceDate;
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.pickUpNote = pickUpNote;
