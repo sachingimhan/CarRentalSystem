@@ -20,6 +20,7 @@ public class FilesStorageServiceImpl implements FilesStorageService {
     @Value("${app.IMG_DIR}")
     String path;
     private Path root = Paths.get("C:/uploads/");
+    private int num = 1;
 
     @Override
     public void init() {
@@ -31,10 +32,10 @@ public class FilesStorageServiceImpl implements FilesStorageService {
     }
 
     @Override
-    public void save(MultipartFile file) {
-        File file1 = new File(path);
-        if (!file1.exists()){
-            if(!file1.mkdir()){
+    public void save(MultipartFile file, String id) {
+        File file1 = new File(path + "/" + id);
+        if (!file1.exists()) {
+            if (!file1.mkdir()) {
                 throw new RuntimeException("Not Created.!");
             }
         }

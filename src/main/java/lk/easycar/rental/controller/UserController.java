@@ -9,8 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-
 @RestController
 @RequestMapping("/api/v1/user")
 @CrossOrigin
@@ -35,9 +33,9 @@ public class UserController {
     }
 
     @PostMapping(path = "/upload")
-    public ResponseEntity uploadFiles(@RequestParam(value = "file[]") MultipartFile[] files) {
+    public ResponseEntity uploadFiles(@RequestParam(value = "file[]") MultipartFile[] files, @RequestParam("nic") String id) {
         for (MultipartFile file : files) {
-            storageService.save(file);
+            storageService.save(file, id);
         }
         return new ResponseEntity(new StrandedResponse(true, "Success.!"), HttpStatus.OK);
     }
