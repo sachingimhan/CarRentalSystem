@@ -7,7 +7,9 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -19,46 +21,45 @@ import java.util.stream.Stream;
 public class FilesStorageServiceImpl implements FilesStorageService {
     @Value("${app.IMG_DIR}")
     String path;
-    private Path root = Paths.get("C:/uploads/");
-    private int num = 1;
+    HttpServletRequest request;
+    private File file;
+    private Path root = Paths.get("/uploads");
 
     @Override
     public void init() {
-        try {
-            Files.createDirectory(root);
-        } catch (IOException e) {
-            throw new RuntimeException("Could not initialize folder for upload!");
-        }
+
     }
 
     @Override
-    public void save(MultipartFile file, String id) {
-        File file1 = new File(path + "/" + id);
-        if (!file1.exists()) {
-            if (!file1.mkdir()) {
+    public void save(MultipartFile img, String id, String rootPath) {
+        file = new File(rootPath + "/uploads/" + id);
+        if (!file.exists()) {
+            if (!file.mkdirs()) {
                 throw new RuntimeException("Not Created.!");
             }
         }
-        Path path1 = Paths.get(file1.getAbsolutePath(), file.getOriginalFilename());
+        Path imgPath = Paths.get(file.getAbsolutePath(), img.getOriginalFilename());
         try {
-            Files.write(path1, file.getBytes());
+            Files.write(imgPath, img.getBytes());
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage() + "");
         }
     }
 
     @Override
-    public Resource load(String filename) {
-        try {
-            Path file = root.resolve(filename);
-            UrlResource resource = new UrlResource(file.toUri());
-            if (resource.exists() || resource.isReadable()) {
-                return resource;
-            } else {
-                throw new RuntimeException("Could not read the file!");
+    public void load(String filename, String rootPath) {
+        File file = new File(rootPath + "/uploads/" + filename);
+        File[] files = file.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                return pathname.isFile() && pathname.getName().endsWith(".jpg") || pathname.getName().endsWith(".png")||pathname.getName().endsWith(".jpeg");
             }
-        } catch (MalformedURLException e) {
-            throw new RuntimeException("Error: " + e.getMessage());
+        });
+        for (File file1 : files) {
+            System.out.println(file1.getPath());
+            System.out.println(file1.getAbsolutePath());
+            System.out.println(file1.getName());
+            System.out.println("=======================");
         }
     }
 

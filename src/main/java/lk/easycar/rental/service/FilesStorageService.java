@@ -9,9 +9,9 @@ import java.util.stream.Stream;
 public interface FilesStorageService {
     void init();
 
-    void save(MultipartFile file,String id);
+    void save(MultipartFile file,String id,String rootPath);
 
-    Resource load(String filename);
+    void load(String filename,String rootPath);
 
     void deleteAll();
 

@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -33,10 +36,21 @@ public class UserController {
     }
 
     @PostMapping(path = "/upload")
-    public ResponseEntity uploadFiles(@RequestParam(value = "file[]") MultipartFile[] files, @RequestParam("nic") String id) {
+    public ResponseEntity uploadFiles(@RequestParam(value = "file[]") MultipartFile[] files, @RequestParam("nic") String id, HttpServletRequest request) {
+        String rootPath = request.getSession().getServletContext().getRealPath("/");
         for (MultipartFile file : files) {
-            storageService.save(file, id);
+            storageService.save(file, id, rootPath);
         }
+        return new ResponseEntity(new StrandedResponse(true, "Success.!"), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/load")
+    public ResponseEntity loadFiles(HttpServletRequest request) {
+        String rootPath = request.getSession().getServletContext().getRealPath("/");
+        String s = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
+        System.out.println(s);
+        storageService.load("153698572V", rootPath);
+
         return new ResponseEntity(new StrandedResponse(true, "Success.!"), HttpStatus.OK);
     }
 
