@@ -3,7 +3,6 @@ package lk.easycar.rental.controller;
 import lk.easycar.rental.dto.CarDTO;
 import lk.easycar.rental.service.CarService;
 import lk.easycar.rental.util.StrandedResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +14,12 @@ import java.util.List;
 @RequestMapping("/api/v1/car")
 @CrossOrigin
 public class CarController {
-    @Autowired
-    CarService carService;
+
+    private CarService carService;
+
+    public CarController(CarService carService) {
+        this.carService = carService;
+    }
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity saveCar(@RequestBody CarDTO dto) {

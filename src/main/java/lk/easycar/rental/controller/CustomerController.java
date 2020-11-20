@@ -17,8 +17,12 @@ import java.util.List;
 @CrossOrigin
 public class CustomerController {
 
-    @Autowired
-    CustomerService service;
+
+    private CustomerService service;
+
+    public CustomerController(CustomerService service) {
+        this.service = service;
+    }
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity saveCustomer(@RequestBody CustomerDTO dto) {
