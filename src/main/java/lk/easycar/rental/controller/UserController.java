@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -52,6 +54,13 @@ public class UserController {
         storageService.load("153698572V", rootPath);
 
         return new ResponseEntity(new StrandedResponse(true, "Success.!"), HttpStatus.OK);
+    }
+
+    @GetMapping(params = {"email", "password"})
+    public ResponseEntity login(@RequestParam("email") String email, @RequestParam("password") String password, HttpServletResponse response) {
+        UserLoginDTO userLoginDTO = service.userLogin(email, password);
+        userLoginDTO.setPassword(null);
+        return new ResponseEntity(new StrandedResponse(true, "Login Success.!", userLoginDTO), HttpStatus.OK);
     }
 
 }

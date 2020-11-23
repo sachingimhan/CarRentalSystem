@@ -8,6 +8,7 @@ import lk.easycar.rental.repo.UserLoginRepo;
 import lk.easycar.rental.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -35,6 +36,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserLoginDTO userLogin(String email, String password) {
-        return null;
+        if (repo.existsByEmail(email)) {
+            UserLogin user = repo.checkLogin(email, password);
+            if (user != null) {
+                return mapper.map(user, UserLoginDTO.class);
+            } else {
+                throw new RuntimeException("Incorrect Password");
+            }
+        } else {
+            throw new RuntimeException("Incorrect Email or Password");
+        }
     }
 }

@@ -15,7 +15,7 @@ import java.sql.Date;
 @ToString
 public class Rent {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int reqId;
     private Date palaceDate;
     private Date fromDate;
