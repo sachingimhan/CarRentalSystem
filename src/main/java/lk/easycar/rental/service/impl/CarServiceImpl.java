@@ -7,9 +7,13 @@ import lk.easycar.rental.service.CarService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,6 +74,24 @@ public class CarServiceImpl implements CarService {
         List<Car> all = repo.findAll();
         if (all.size() > 0) {
             return mapper.map(all, new TypeToken<List<CarDTO>>() {
+            }.getType());
+        }
+        return null;
+    }
+
+    @Override
+    public Page<CarDTO> getAllCars(int page, int size) {
+        Pageable req = PageRequest.of(page - 1, size);
+        Page<Car> all = repo.findAll(req);
+        return mapper.map(all, new TypeToken<Page<CarDTO>>() {
+        }.getType());
+    }
+
+    @Override
+    public List<CarDTO> getCars(Date from, Date to, String type) {
+        Optional<Car> car = repo.searchCar(from, to, type);
+        if (car.isPresent()) {
+            return mapper.map(car, new TypeToken<Optional<Car>>() {
             }.getType());
         }
         return null;

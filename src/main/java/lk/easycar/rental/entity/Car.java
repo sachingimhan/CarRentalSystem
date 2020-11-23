@@ -1,5 +1,6 @@
 package lk.easycar.rental.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 
@@ -32,6 +33,7 @@ public class Car {
     private double drivenKm;
 
     @OneToMany(mappedBy = "car",cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Rent> rentList;
 
     public Car(String regNo, String brand, String type, int passengerCount, String color, String transmissionType, String fuelType, double dailyRate, double monthlyRate, double extraKmPrice, double dailyFreeKm, double monthlyFreeKm, double drivenKm) {
