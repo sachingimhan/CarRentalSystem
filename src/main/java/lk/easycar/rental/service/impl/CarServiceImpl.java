@@ -34,6 +34,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public boolean saveCar(CarDTO dto) {
         if (!repo.existsById(dto.getRegNo())) {
+            dto.setStates("active");
             repo.save(mapper.map(dto, Car.class));
             return true;
         }

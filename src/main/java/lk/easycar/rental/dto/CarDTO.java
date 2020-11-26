@@ -28,8 +28,9 @@ public class CarDTO {
     private double dailyFreeKm;
     private double monthlyFreeKm;
     private double drivenKm;
+    private String states;
 
-    public CarDTO(String regNo, String brand, String type, int passengerCount, String color, String transmissionType, String fuelType, double waiverAmount, double dailyRate, double monthlyRate, double extraKmPrice, double dailyFreeKm, double monthlyFreeKm, double drivenKm) {
+    public CarDTO(String regNo, String brand, String type, int passengerCount, String color, String transmissionType, String fuelType, double waiverAmount, double dailyRate, double monthlyRate, double extraKmPrice, double dailyFreeKm, double monthlyFreeKm, double drivenKm, String states) {
         this.regNo = regNo;
         this.brand = brand;
         this.type = type;
@@ -44,5 +45,6 @@ public class CarDTO {
         this.dailyFreeKm = dailyFreeKm;
         this.monthlyFreeKm = monthlyFreeKm;
         this.drivenKm = drivenKm;
+        this.states = states;
     }
 }

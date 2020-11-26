@@ -1,7 +1,5 @@
 package lk.easycar.rental.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import lk.easycar.rental.dto.RentDTO;
 import lk.easycar.rental.service.RentService;
 import lk.easycar.rental.util.StrandedResponse;
@@ -56,10 +54,10 @@ public class RentController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity searchCar(@PathVariable("id") int id) {
-        RentDTO rentDTO = rentService.searchRent(id);
-        if (rentDTO != null) {
-            return new ResponseEntity(new StrandedResponse(true, "Rent Found.!", rentDTO), HttpStatus.OK);
+    public ResponseEntity searchCar(@PathVariable("id") String id) {
+        List<RentDTO> rentDTOS = rentService.searchRent(id);
+        if (rentDTOS != null) {
+            return new ResponseEntity(new StrandedResponse(true, "Rent Found.!", rentDTOS), HttpStatus.OK);
         } else {
             return new ResponseEntity(new StrandedResponse(false, "Rent Not Found.!"), HttpStatus.OK);
         }
@@ -72,6 +70,16 @@ public class RentController {
             return new ResponseEntity(new StrandedResponse(true, "Rents Found.!", allRents), HttpStatus.OK);
         } else {
             return new ResponseEntity(new StrandedResponse(false, "Rents Not Found.!"), HttpStatus.OK);
+        }
+    }
+
+    @PutMapping(params = {"reqId", "state", "reason"})
+    public ResponseEntity changeRequestState(@RequestParam("reqId") String reqId, @RequestParam("state") String state, @RequestParam("reason") String reason) {
+        boolean b = rentService.requestStateChange(reqId, state, reason);
+        if (b) {
+            return new ResponseEntity(new StrandedResponse(b, "Rent State Updated.!"), HttpStatus.OK);
+        } else {
+            return new ResponseEntity(new StrandedResponse(b, "Rent State Not Updated.!"), HttpStatus.OK);
         }
     }
 

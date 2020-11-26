@@ -1,10 +1,6 @@
 package lk.easycar.rental.service.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import lk.easycar.rental.dto.RentDTO;
-import lk.easycar.rental.entity.Car;
-import lk.easycar.rental.entity.Customer;
 import lk.easycar.rental.entity.Rent;
 import lk.easycar.rental.repo.CarRepo;
 import lk.easycar.rental.repo.CustomerRepo;
@@ -13,13 +9,12 @@ import lk.easycar.rental.repo.RentRepo;
 import lk.easycar.rental.service.RentService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.modelmapper.config.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -52,8 +47,13 @@ public class RentServiceImpl implements RentService {
     }
 
     @Override
-    public RentDTO searchRent(int id) {
-        return mapper.map(repo.findById(id), RentDTO.class);
+    public List<RentDTO> searchRent(String id) {
+        List<Rent> allByCustomer = repo.getAllRequestFromCustomer(id);
+        if (allByCustomer.size() > 0) {
+            return mapper.map(allByCustomer, new TypeToken<List<RentDTO>>() {
+            }.getType());
+        }
+        return null;
     }
 
     @Override
@@ -67,11 +67,18 @@ public class RentServiceImpl implements RentService {
 
     @Override
     public List<RentDTO> getAllRents() {
-        List<Rent> all = repo.findAll();
+        Sort sort = Sort.by(Sort.Order.desc("palaceDate"));
+        List<Rent> all = repo.findAll(sort);
         if (all.size() > 0) {
             return mapper.map(all, new TypeToken<List<RentDTO>>() {
             }.getType());
         }
         return null;
+    }
+
+    @Override
+    public boolean requestStateChange(String reqId, String state, String reason) {
+        repo.changeRequestState(reqId, state, reason);
+        return true;
     }
 }

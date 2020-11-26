@@ -27,6 +27,7 @@ public class Car {
     private double monthlyRate;
     private double extraKmPrice;
     private double dailyFreeKm;
+    private String states;
     private double monthlyFreeKm;
     private double drivenKm;
 
@@ -34,7 +35,7 @@ public class Car {
     @JsonIgnore
     private List<Rent> rentList;
 
-    public Car(String regNo, String brand, String type, int passengerCount, String color, String transmissionType, String fuelType, double waiverAmount, double dailyRate, double monthlyRate, double extraKmPrice, double dailyFreeKm, double monthlyFreeKm, double drivenKm) {
+    public Car(String regNo, String brand, String type, int passengerCount, String color, String transmissionType, String fuelType, double waiverAmount, double dailyRate, double monthlyRate, double extraKmPrice, double dailyFreeKm, String states, double monthlyFreeKm, double drivenKm) {
         this.regNo = regNo;
         this.brand = brand;
         this.type = type;
@@ -47,6 +48,7 @@ public class Car {
         this.monthlyRate = monthlyRate;
         this.extraKmPrice = extraKmPrice;
         this.dailyFreeKm = dailyFreeKm;
+        this.states = states;
         this.monthlyFreeKm = monthlyFreeKm;
         this.drivenKm = drivenKm;
     }
