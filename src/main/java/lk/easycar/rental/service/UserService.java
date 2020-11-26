@@ -6,4 +6,6 @@ public interface UserService {
     boolean registration(UserLoginDTO dto);
 
     UserLoginDTO userLogin(String email,String password);
+
+    boolean updateUserDetails(UserLoginDTO dto);
 }

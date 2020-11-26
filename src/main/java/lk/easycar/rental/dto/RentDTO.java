@@ -1,5 +1,6 @@
 package lk.easycar.rental.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lk.easycar.rental.entity.Driver;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,16 +20,19 @@ import java.sql.Time;
 public class RentDTO {
 
     private int reqId;
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date palaceDate;
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date fromDate;
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date toDate;
     private String pickUpNote;
     private String returnNote;
     private BigDecimal waiverAmount;
     private String state;
+    private String reason;
     private CustomerDTO customer;
     private CarDTO car;
-    private CarReturnDTO returnCar;
     private DriverDTO driver;
 
     public RentDTO(int reqId, Date palaceDate, Date fromDate, Date toDate, String pickUpNote, String returnNote, BigDecimal waiverAmount, String state, CustomerDTO customer, CarDTO car) {

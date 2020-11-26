@@ -1,5 +1,6 @@
 package lk.easycar.rental.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,7 +20,8 @@ public class Driver {
     private String fullName;
     private String address;
     private String contact;
-    @OneToMany(mappedBy = "driver")
+    @OneToMany(mappedBy = "driver", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Rent> rentList;
 
     public Driver(String nic, String fullName, String address, String contact) {

@@ -1,8 +1,8 @@
 package lk.easycar.rental.service;
 
-import lk.easycar.rental.dto.CustomerDTO;
 import lk.easycar.rental.dto.DriverDTO;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface DriverService {
@@ -15,4 +15,6 @@ public interface DriverService {
     boolean deleteDriver(String id);
 
     List<DriverDTO> getAllDrivers();
+
+    List<DriverDTO> searchAvailableDrivers(Date from, Date to);
 }

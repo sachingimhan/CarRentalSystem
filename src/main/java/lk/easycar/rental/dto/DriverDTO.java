@@ -21,14 +21,11 @@ public class DriverDTO {
     private String fullName;
     private String address;
     private String contact;
-    private List<Rent> rentList;
-    private UserLogin login;
 
-    public DriverDTO(String nic, String fullName, String address, String contact, UserLogin login) {
+    public DriverDTO(String nic, String fullName, String address, String contact) {
         this.nic = nic;
         this.fullName = fullName;
         this.address = address;
         this.contact = contact;
-        this.login = login;
     }
 }

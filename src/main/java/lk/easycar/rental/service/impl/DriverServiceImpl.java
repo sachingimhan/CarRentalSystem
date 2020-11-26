@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
+
 @Service
 @Transactional
 public class DriverServiceImpl implements DriverService {
@@ -44,7 +46,7 @@ public class DriverServiceImpl implements DriverService {
         if (id != null) {
             Optional<Driver> driver = repo.findById(id);
             if (driver.isPresent()) {
-                return mapper.map(driver, DriverDTO.class);
+                return mapper.map(driver.get(), DriverDTO.class);
             }
         }
         return null;
@@ -67,5 +69,13 @@ public class DriverServiceImpl implements DriverService {
             }.getType());
         }
         return null;
+    }
+
+    @Override
+    public List<DriverDTO> searchAvailableDrivers(Date from, Date to) {
+        List<Driver> drivers = repo.searchAvailableDrivers(from, to);
+        System.out.println(drivers.size());
+        return mapper.map(drivers, new TypeToken<List<DriverDTO>>() {
+        }.getType());
     }
 }

@@ -94,7 +94,7 @@ public class CarController {
         if (cars.size() > 0) {
             return new ResponseEntity(new StrandedResponse(true, "Found", cars), HttpStatus.OK);
         }
-        return new ResponseEntity(new StrandedResponse(false, "Not Found"), HttpStatus.OK);
+        return new ResponseEntity(new StrandedResponse(false, "Oops, Not Cars Found"), HttpStatus.OK);
     }
 
 }

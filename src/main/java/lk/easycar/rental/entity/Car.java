@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +22,7 @@ public class Car {
     private String color;
     private String transmissionType;
     private String fuelType;
+    private double waiverAmount;
     private double dailyRate;
     private double monthlyRate;
     private double extraKmPrice;
@@ -36,7 +34,7 @@ public class Car {
     @JsonIgnore
     private List<Rent> rentList;
 
-    public Car(String regNo, String brand, String type, int passengerCount, String color, String transmissionType, String fuelType, double dailyRate, double monthlyRate, double extraKmPrice, double dailyFreeKm, double monthlyFreeKm, double drivenKm) {
+    public Car(String regNo, String brand, String type, int passengerCount, String color, String transmissionType, String fuelType, double waiverAmount, double dailyRate, double monthlyRate, double extraKmPrice, double dailyFreeKm, double monthlyFreeKm, double drivenKm) {
         this.regNo = regNo;
         this.brand = brand;
         this.type = type;
@@ -44,6 +42,7 @@ public class Car {
         this.color = color;
         this.transmissionType = transmissionType;
         this.fuelType = fuelType;
+        this.waiverAmount = waiverAmount;
         this.dailyRate = dailyRate;
         this.monthlyRate = monthlyRate;
         this.extraKmPrice = extraKmPrice;

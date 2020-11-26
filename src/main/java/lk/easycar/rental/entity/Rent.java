@@ -1,7 +1,12 @@
 package lk.easycar.rental.entity;
 
 
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -9,13 +14,12 @@ import java.sql.Date;
 
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @ToString
 public class Rent {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int reqId;
     private Date palaceDate;
     private Date fromDate;
@@ -24,16 +28,27 @@ public class Rent {
     private String returnNote;
     private BigDecimal waiverAmount;
     private String state;
-    @ManyToOne
+    @Nullable
+    @JsonIgnore
+    private String reason;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "CustNic", referencedColumnName = "nic", nullable = false)
+    @JsonIgnore
     private Customer customer;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "RegNo", referencedColumnName = "regNo", nullable = false)
+    @JsonIgnore
     private Car car;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "DrId", referencedColumnName = "nic", nullable = true)
+    @JsonIgnore
     private Driver driver;
-    @OneToOne(mappedBy = "rent")
+
+    @OneToOne(mappedBy = "rent", cascade = CascadeType.ALL)
+    @JsonIgnore
     private CarReturn returnCar;
 
 

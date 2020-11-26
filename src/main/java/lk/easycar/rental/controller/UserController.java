@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -32,9 +31,9 @@ public class UserController {
     public ResponseEntity registration(@RequestBody UserLoginDTO dto) {
         boolean registration = service.registration(dto);
         if (registration) {
-            return new ResponseEntity(new StrandedResponse(true, "Success.!"), HttpStatus.OK);
+            return new ResponseEntity(new StrandedResponse(true, "Registration Success.!"), HttpStatus.OK);
         }
-        return new ResponseEntity(new StrandedResponse(false, "Fail.!"), HttpStatus.OK);
+        return new ResponseEntity(new StrandedResponse(false, "Registration Fail.!"), HttpStatus.OK);
     }
 
     @PostMapping(path = "/upload")
@@ -63,4 +62,12 @@ public class UserController {
         return new ResponseEntity(new StrandedResponse(true, "Login Success.!", userLoginDTO), HttpStatus.OK);
     }
 
+    @PutMapping
+    public ResponseEntity updateUser(@RequestBody UserLoginDTO dto) {
+        boolean b = service.updateUserDetails(dto);
+        if (b) {
+            return new ResponseEntity(new StrandedResponse(true, "Update Success.!"), HttpStatus.OK);
+        }
+        return new ResponseEntity(new StrandedResponse(false, "Update Fail.!"), HttpStatus.OK);
+    }
 }
